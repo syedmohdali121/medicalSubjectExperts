@@ -1,12 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pubmed_parser as pp
-import MySQLdb
-
-# You need an active internet connection for this program to work.
-# This entire program takes a lot of time so be patient. Oh yeah, install the above two repo's first, i.e bs4 and requests. 
-# Run this if you just want to make edits in your current database. Else import from the dump file.
-# If you have just ran the db_maker.py, running this is okay, don't worry :)
+import pymysql
 
 def get_citations(pmcid):
 	pmcid="PMC"+pmcid
@@ -27,7 +22,7 @@ def get_citations(pmcid):
 	return [url.replace(r'/pubmed/', '') for url in pubmed_article_urls]
 
 if __name__ == '__main__': 
-	db=MySQLdb.connect(host="127.0.0.1",user="root",passwd="password",db="pubmed")
+	db=pymysql.connect(host="127.0.0.1",user="root",passwd="dehradun123",db="pubmed")
 	curr=db.cursor()
 	curr.execute("select pmc from pubmed_article where pmc like 'P%';")
 	pmc_list=[pm[0][3:] for pm in curr.fetchall()]

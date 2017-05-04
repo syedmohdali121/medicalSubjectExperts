@@ -1,8 +1,8 @@
 import pubmed_parser as pp
 import pandas as pd
-import MySQLdb
+import pymysql
 pubmed_data=pp.parse_medline_xml("medsample1.xml")
-db=MySQLdb.connect(host="127.0.0.1",user="root",passwd="password",db="pubmed")
+db=pymysql.connect(host="127.0.0.1",user="root",passwd="dehradun123",db="pubmed")
 curr=db.cursor()
 print(pubmed_data[5].keys())
 print(pubmed_data[5])
